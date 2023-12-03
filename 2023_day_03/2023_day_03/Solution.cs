@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 
 namespace _2023_day_03 {
@@ -88,20 +89,20 @@ namespace _2023_day_03 {
         public void PartTwo() {
             for (int row = 0; row < size; row++) {
                 for (int col = 0; col < size; col++) {
-                    if(inputMatrix[row, col] == '*') {
+                    if (inputMatrix[row, col] == '*') {
                         //check if neighbour for any number
                         int count = 0;
                         uint ratio = 1;
-                        foreach(Number nmb in NumberList) {
-                            foreach(Star star in nmb.StarNeighbours) {
-                                if(star.row == row && star.col == col) {
+                        foreach (Number nmb in NumberList) {
+                            foreach (Star star in nmb.StarNeighbours) {
+                                if (star.row == row && star.col == col) {
                                     count++;
                                     ratio *= Convert.ToUInt32(nmb.Value);
 
                                 }
                             }
-                        } 
-                        if(count == 2) {
+                        }
+                        if (count == 2) {
                             //its a gear
                             Result_PartTwo += ratio;
                         }
@@ -113,97 +114,24 @@ namespace _2023_day_03 {
         }
         private void CheckStarNeighbour(int _row, int _col, ref Number _currentNumber) {
             //check top/
-            try {
-                if (inputMatrix[_row - 1, _col] == '*') {
-                    if(!_currentNumber.StarNeighbours.Any(x=> (x.row == _row - 1 && x.col == _col))){
-                        //doesn exist already
-                        Star newStar = new Star();
-                        newStar.row = _row - 1;
-                        newStar.col = _col;
-                        _currentNumber.StarNeighbours.Add(newStar);
+            for (int i = _row - 1; i <= _row + 1; i++) {
+                for (int j = _col - 1; j <= _col + 1; j++) {
+                    if (i == _row && j == _col) {
+                        continue;
                     }
+                    CheckStarNeighbourSub(i, j, ref _currentNumber);
+                       
                 }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check topright:
+            }
+        }
+        private void CheckStarNeighbourSub(int _row, int _col, ref Number _currentNumber) {
             try {
-                if (inputMatrix[_row - 1, _col + 1] == '*') {
-                    if (!_currentNumber.StarNeighbours.Any(x => (x.row == _row - 1 && x.col == _col + 1))){
-                        //doesn exist already
-                        Star newStar = new Star();
-                        newStar.row = _row - 1;
-                        newStar.col = _col + 1;
-                        _currentNumber.StarNeighbours.Add(newStar);
-                    }
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check right:
-            try {
-                if (inputMatrix[_row, _col + 1] == '*') {
-                    if (!_currentNumber.StarNeighbours.Any(x => (x.row == _row && x.col == _col + 1))) {
+                if (inputMatrix[_row, _col] == '*') {
+                    if (!_currentNumber.StarNeighbours.Any(x => (x.row == _row && x.col == _col))) {
                         //doesn exist already
                         Star newStar = new Star();
                         newStar.row = _row;
-                        newStar.col = _col + 1;
-                        _currentNumber.StarNeighbours.Add(newStar);
-                    }
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check bottoright:
-            try {
-                if (inputMatrix[_row + 1, _col + 1] == '*') {
-                    if (!_currentNumber.StarNeighbours.Any(x => (x.row == _row + 1 && x.col == _col + 1))) {
-                        //doesn exist already
-                        Star newStar = new Star();
-                        newStar.row = _row + 1;
-                        newStar.col = _col + 1;
-                        _currentNumber.StarNeighbours.Add(newStar);
-                    }
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check bottom:
-            try {
-                if (inputMatrix[_row + 1, _col] == '*') {
-                    if (!_currentNumber.StarNeighbours.Any(x => (x.row == _row + 1 && x.col == _col))) {
-                        //doesn exist already
-                        Star newStar = new Star();
-                        newStar.row = _row + 1;
                         newStar.col = _col;
-                        _currentNumber.StarNeighbours.Add(newStar);
-                    }
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check bottomleft:
-            try {
-                if (inputMatrix[_row + 1, _col - 1] == '*') {
-                    if (!_currentNumber.StarNeighbours.Any(x => (x.row == _row + 1 && x.col == _col - 1))) {
-                        //doesn exist already
-                        Star newStar = new Star();
-                        newStar.row = _row + 1;
-                        newStar.col = _col - 1;
-                        _currentNumber.StarNeighbours.Add(newStar);
-                    }
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check left:
-            try {
-                if (inputMatrix[_row, _col - 1] == '*') {
-                    if (!_currentNumber.StarNeighbours.Any(x => (x.row == _row && x.col == _col - 1))) {
-                        //doesn exist already
-                        Star newStar = new Star();
-                        newStar.row = _row;
-                        newStar.col = _col - 1;
-                        _currentNumber.StarNeighbours.Add(newStar);
-                    }
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check topleft:
-            try {
-                if (inputMatrix[_row - 1, _col - 1] == '*') {
-                    if (!_currentNumber.StarNeighbours.Any(x => (x.row == _row - 1 && x.col == _col - 1))) {
-                        //doesn exist already
-                        Star newStar = new Star();
-                        newStar.row = _row - 1;
-                        newStar.col = _col - 1;
                         _currentNumber.StarNeighbours.Add(newStar);
                     }
                 }
@@ -211,65 +139,28 @@ namespace _2023_day_03 {
         }
         private bool CheckNeighbour(int _row,int _col) {
             bool result = false;
-            //check top:
-            try {
-                if (!(System.Char.IsDigit(inputMatrix[_row - 1, _col]) || inputMatrix[_row - 1, _col] == '.')) {
-                    //if neither -> symbol
-                    return true;
+            for(int i = _row - 1; i <= _row + 1; i++) {
+                for (int j = _col - 1; j <= _col + 1; j++) {
+                    if(i ==_row &&j == _col) {
+                        continue;
+                    }
+                    if (CheckNeighbourSub(i, j)) {
+                        return true;
+                    }
                 }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check topright:
-            try {
-                if (!(System.Char.IsDigit(inputMatrix[_row - 1, _col + 1]) || inputMatrix[_row - 1, _col +1 ] == '.')) {
-                    //if neither -> symbol
-                    return true;
-
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check right:
-            try {
-                if (!(System.Char.IsDigit(inputMatrix[_row, _col + 1]) || inputMatrix[_row, _col + 1] == '.')) {
-                    //if neither -> symbol
-                    return true;
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check bottoright:
-            try {
-                if (!(System.Char.IsDigit(inputMatrix[_row + 1, _col + 1]) || inputMatrix[_row + 1, _col + 1] == '.')) {
-                    //if neither -> symbol
-                    return true;
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check bottom:
-            try {
-                if (!(System.Char.IsDigit(inputMatrix[_row + 1, _col]) || inputMatrix[_row + 1, _col] == '.')) {
-                    //if neither -> symbol
-                    return true;
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check bottomleft:
-            try {
-                if (!(System.Char.IsDigit(inputMatrix[_row + 1, _col - 1]) || inputMatrix[_row + 1, _col - 1] == '.')) {
-                    //if neither -> symbol
-                    return true;
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check left:
-            try {
-                if (!(System.Char.IsDigit(inputMatrix[_row, _col - 1]) || inputMatrix[_row, _col - 1] == '.')) {
-                    //if neither -> symbol
-                    return true;
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
-            //check topleft:
-            try {
-                if (!(System.Char.IsDigit(inputMatrix[_row - 1, _col - 1]) || inputMatrix[_row - 1, _col - 1] == '.')) {
-                    //if neither -> symbol
-                    return true;
-                }
-            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
+            }
             return result;
         }
-
+        private bool CheckNeighbourSub(int _row, int _col) {
+            try {
+                if (!(System.Char.IsDigit(inputMatrix[_row , _col]) || inputMatrix[_row , _col] == '.')) {
+                    //if neither -> symbol
+                    return true;
+                }
+            } catch (Exception ex) when (ex is System.IndexOutOfRangeException) { };
+            return false;
+        }
     }
+
+
 }
