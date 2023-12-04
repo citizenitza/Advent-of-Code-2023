@@ -1,0 +1,15 @@
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\2023_day_04.csproj.AssemblyReference.cache
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\2023_day_04.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\2023_day_04.AssemblyInfoInputs.cache
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\2023_day_04.AssemblyInfo.cs
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\2023_day_04.csproj.CoreCompileInputs.cache
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\bin\Debug\net7.0\2023_day_04.exe
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\bin\Debug\net7.0\2023_day_04.deps.json
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\bin\Debug\net7.0\2023_day_04.runtimeconfig.json
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\bin\Debug\net7.0\2023_day_04.dll
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\bin\Debug\net7.0\2023_day_04.pdb
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\2023_day_04.dll
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\refint\2023_day_04.dll
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\2023_day_04.pdb
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\2023_day_04.genruntimeconfig.cache
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_04\2023_day_04\obj\Debug\net7.0\ref\2023_day_04.dll
