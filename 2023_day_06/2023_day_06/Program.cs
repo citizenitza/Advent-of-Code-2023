@@ -4,6 +4,8 @@
             Solution newSolution = new Solution();
             newSolution.PartOne();
             Console.WriteLine("Part one solution: " + newSolution.Result_PartOne.ToString());
+            newSolution.BetterSolution();
+            Console.WriteLine("Part one solution: " + newSolution.Result_PartOne.ToString());
 
         }
     }
