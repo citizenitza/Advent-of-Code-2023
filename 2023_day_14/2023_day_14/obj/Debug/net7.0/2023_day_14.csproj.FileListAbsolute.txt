@@ -1,0 +1,15 @@
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\bin\Debug\net7.0\2023_day_14.exe
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\bin\Debug\net7.0\2023_day_14.deps.json
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\bin\Debug\net7.0\2023_day_14.runtimeconfig.json
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\bin\Debug\net7.0\2023_day_14.dll
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\bin\Debug\net7.0\2023_day_14.pdb
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\2023_day_14.csproj.AssemblyReference.cache
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\2023_day_14.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\2023_day_14.AssemblyInfoInputs.cache
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\2023_day_14.AssemblyInfo.cs
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\2023_day_14.csproj.CoreCompileInputs.cache
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\2023_day_14.dll
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\refint\2023_day_14.dll
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\2023_day_14.pdb
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\2023_day_14.genruntimeconfig.cache
+C:\Users\DanielM\Desktop\aoc_2023\2023_day_14\2023_day_14\obj\Debug\net7.0\ref\2023_day_14.dll
