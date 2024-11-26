@@ -20,6 +20,7 @@ namespace _2023_day_17 {
         //public bool Start;
         //public bool End;
         public bool Visited;
+        public string MainPath;
 
     }
     internal class Solution {
@@ -29,7 +30,7 @@ namespace _2023_day_17 {
         public int MatrixSize;
         public Tile[,] Map;
         public uint[,] HeatDistanceMap;
-        string  HeatDistMapString;
+        string HeatDistMapString;
         public Solution() {
             string lineOfText;
             string ConfigPath = AppDomain.CurrentDomain.BaseDirectory + "input.txt";
@@ -48,7 +49,7 @@ namespace _2023_day_17 {
                     MatrixSize = lineOfText.Count();
                     //initialize input
                     Map = new Tile[MatrixSize, MatrixSize];
-                    HeatDistanceMap = new uint[MatrixSize,MatrixSize];
+                    HeatDistanceMap = new uint[MatrixSize, MatrixSize];
                 }
                 int Col = 0;
                 foreach (char c in lineOfText) {
@@ -59,14 +60,15 @@ namespace _2023_day_17 {
                 Row++;
             }
             //init first
-            
+
         }
 
         public void PartOne() {
-            Map[0,0].Visited = true; 
-            Map[0,0].StraightCount = 1;
-            ProcessNeighbours(0, 0,Direction.Nodirection);
-            Result_PartOne = Map[MatrixSize-1, MatrixSize-1].HeatDistance;
+            Map[0, 0].Visited = true;
+            Map[0, 0].StraightCount = 1;
+            ProcessNeighbours(0, 0, Direction.Nodirection);
+            Result_PartOne = Map[MatrixSize - 1, MatrixSize - 1].HeatDistance;
+            DrawAocDebugMap();
             DrawHeadDistance();
         }
         public void PartTwo() {
@@ -286,7 +288,7 @@ namespace _2023_day_17 {
                 if (_col != (MatrixSize - 1) && _lastDirection != Direction.Left) {
                     int newcol = _col + 1;
                     bool TurnTaken = false;
-                    if(_col == 0 && _row == 0) {
+                    if (_col == 0 && _row == 0) {
                         ;
                     }
                     if (_lastDirection == Direction.Right) {
@@ -303,7 +305,7 @@ namespace _2023_day_17 {
                         //Map[_row, newcol].StraightCount = 1;
                     }
 
-                        //accessible
+                    //accessible
                     uint newHeatDistance = current.HeatDistance + Map[_row, newcol].HeatLossValue;
                     if (Map[_row, newcol].Visited) {
                         if (newHeatDistance <= Map[_row, newcol].HeatDistance) {
@@ -313,7 +315,7 @@ namespace _2023_day_17 {
                             } else {
                                 Map[_row, newcol].StraightCount = current.StraightCount + 1;
                             }
-                            ProcessNeighbours(_row, newcol,Direction.Right);
+                            ProcessNeighbours(_row, newcol, Direction.Right);
                         }
 
                     } else {
@@ -328,9 +330,9 @@ namespace _2023_day_17 {
                         ProcessNeighbours(_row, newcol, Direction.Right);
                     }
 
-                    
+
                 }
-            }while(false);
+            } while (false);
 
         }
         private void CopyDistMap() {
@@ -354,14 +356,65 @@ namespace _2023_day_17 {
                 }
                 Console.WriteLine(line);
             }
-
+            Console.WriteLine("");
+            Console.WriteLine("");
+            var originalColor = Console.ForegroundColor;
             for (int Row = 0; Row < MatrixSize; Row++) {
-                string line = "";
+                //string line = "";
                 for (int Col = 0; Col < MatrixSize; Col++) {
-                    line += Map[Row, Col].LastDirection.ToString() + "   ";
+                    if (Map[Row, Col].MainPath == null) {
+                        Console.Write(Map[Row, Col].HeatLossValue.ToString() + " ");
+                    } else {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(Map[Row,Col].MainPath + " ");
+                        Console.ForegroundColor = originalColor;
+                    }
+                    
                 }
-                Console.WriteLine(line);
+                Console.Write("\r\n");
             }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            //for (int Row = 0; Row < MatrixSize; Row++) {
+            //    string line = "";
+            //    for (int Col = 0; Col < MatrixSize; Col++) {
+            //        line += Map[Row, Col].LastDirection.ToString() + "   ";
+            //    }
+            //    Console.WriteLine(line);
+            //}
+
+        }
+
+
+        private void DrawAocDebugMap() {
+            //Console.WriteLine("");
+            //Console.WriteLine("");
+            int CurrentRow = MatrixSize - 1;
+            int CurrentCol = MatrixSize - 1;
+            while (true) {
+                if(Map[CurrentRow, CurrentCol].LastDirection == Direction.Left) {
+                    Map[CurrentRow, CurrentCol].MainPath = "<";
+                    CurrentCol++;
+                    continue;
+                } else if (Map[CurrentRow, CurrentCol].LastDirection == Direction.Right) {
+                    Map[CurrentRow, CurrentCol].MainPath = ">";
+                    CurrentCol--;
+                    continue;
+                } else if (Map[CurrentRow, CurrentCol].LastDirection == Direction.Up) {
+                    Map[CurrentRow, CurrentCol].MainPath = "^";
+                    CurrentRow++;
+                    continue;
+                } else if (Map[CurrentRow, CurrentCol].LastDirection == Direction.Down) {
+                    Map[CurrentRow, CurrentCol].MainPath = "V";
+                    CurrentRow--;
+                    continue;
+                } else if (Map[CurrentRow, CurrentCol].LastDirection == Direction.Nodirection) {
+                    break;
+                }
+
+
+            }
+            //Console.WriteLine("Done");
 
         }
 

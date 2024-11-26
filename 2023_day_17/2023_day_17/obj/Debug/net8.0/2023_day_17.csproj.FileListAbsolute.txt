@@ -12,3 +12,17 @@ C:\Users\DanielM\Desktop\aoc_2023\2023_day_17\2023_day_17\obj\Debug\net8.0\refin
 C:\Users\DanielM\Desktop\aoc_2023\2023_day_17\2023_day_17\obj\Debug\net8.0\2023_day_17.pdb
 C:\Users\DanielM\Desktop\aoc_2023\2023_day_17\2023_day_17\obj\Debug\net8.0\2023_day_17.genruntimeconfig.cache
 C:\Users\DanielM\Desktop\aoc_2023\2023_day_17\2023_day_17\obj\Debug\net8.0\ref\2023_day_17.dll
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\bin\Debug\net8.0\2023_day_17.exe
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\bin\Debug\net8.0\2023_day_17.deps.json
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\bin\Debug\net8.0\2023_day_17.runtimeconfig.json
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\bin\Debug\net8.0\2023_day_17.dll
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\bin\Debug\net8.0\2023_day_17.pdb
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\obj\Debug\net8.0\2023_day_17.GeneratedMSBuildEditorConfig.editorconfig
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\obj\Debug\net8.0\2023_day_17.AssemblyInfoInputs.cache
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\obj\Debug\net8.0\2023_day_17.AssemblyInfo.cs
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\obj\Debug\net8.0\2023_day_17.csproj.CoreCompileInputs.cache
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\obj\Debug\net8.0\2023_day_17.dll
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\obj\Debug\net8.0\refint\2023_day_17.dll
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\obj\Debug\net8.0\2023_day_17.pdb
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\obj\Debug\net8.0\2023_day_17.genruntimeconfig.cache
+E:\Work\_Projects\_Advent_of_Code\Advent-of-Code-2023-main\2023_day_17\2023_day_17\obj\Debug\net8.0\ref\2023_day_17.dll
