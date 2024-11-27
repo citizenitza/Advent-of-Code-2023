@@ -8,23 +8,23 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\DanielM\\.nuget\\packages\\": {},
+    "C:\\Users\\dm\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DanielM\\Desktop\\aoc_2023\\2023_day_17\\2023_day_17\\2023_day_17.csproj",
+      "projectUniqueName": "E:\\Work\\_Projects\\_Advent_of_Code\\Advent-of-Code-2023-main\\2023_day_17\\2023_day_17\\2023_day_17.csproj",
       "projectName": "2023_day_17",
-      "projectPath": "C:\\Users\\DanielM\\Desktop\\aoc_2023\\2023_day_17\\2023_day_17\\2023_day_17.csproj",
-      "packagesPath": "C:\\Users\\DanielM\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DanielM\\Desktop\\aoc_2023\\2023_day_17\\2023_day_17\\obj\\",
+      "projectPath": "E:\\Work\\_Projects\\_Advent_of_Code\\Advent-of-Code-2023-main\\2023_day_17\\2023_day_17\\2023_day_17.csproj",
+      "packagesPath": "C:\\Users\\dm\\.nuget\\packages\\",
+      "outputPath": "E:\\Work\\_Projects\\_Advent_of_Code\\Advent-of-Code-2023-main\\2023_day_17\\2023_day_17\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\DanielM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dm\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -72,7 +72,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

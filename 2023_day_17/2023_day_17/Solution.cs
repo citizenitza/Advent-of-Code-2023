@@ -23,6 +23,10 @@ namespace _2023_day_17 {
         public string MainPath;
 
     }
+    public struct StackData {
+        public int row;
+        public int col;
+    }
     internal class Solution {
         public uint Result_PartOne;
         public uint Result_PartTwo;
@@ -64,6 +68,7 @@ namespace _2023_day_17 {
 
         }
 
+        List <StackData> Stack = new List <StackData>(); 
         public void PartOne() {
             Map[0, 0].Visited = true;
             Map[0, 0].StraightCount = 1;
@@ -76,216 +81,24 @@ namespace _2023_day_17 {
         }
 
         private void ProcessNeighbours(int _row, int _col, Direction _lastDirection) {
-            Console.WriteLine("Row: " + _row.ToString() + " Col: " + _col.ToString());
             CycleCnt++;
             Tile current = Map[_row, _col];
             Map[_row, _col].LastDirection = _lastDirection;
-            DrawHeatDistanceMap();
-            Console.Clear();
+            StackData stackitem = new StackData();
+            stackitem.row = _row;
+            stackitem.col = _col;
+            Stack.Add(stackitem);
+            //debug
+            //Console.WriteLine("Row: " + _row.ToString() + " Col: " + _col.ToString());
+            //Console.WriteLine("Current Straight count: " + Map[_row, _col].StraightCount.ToString());
+            //DrawHeatDistanceMap();
+            //Console.Clear();
+
             if (current.HeatDistance == 76 && _row == 9 && _col == 12) {
                 CopyDistMap();
             }
-            //top neighbour
-            do {
-                if (_row != 0 && _lastDirection != Direction.Down) {
-                    int newrow = _row - 1;
-                    bool TurnTaken = false;
-                    if (_lastDirection == Direction.Up) {
-                        if (current.StraightCount > 2) {
-                            //cant go more 
-                            break;
-                        } else {
-                            TurnTaken = false;
-                            //Map[newrow, _col].StraightCount = current.StraightCount + 1;
-                        }
-                    } else {
-                        //turn taken
-                        TurnTaken = true;
-                        //Map[newrow, _col].StraightCount = 1;
-                    }
-
-                    //accessible
-                    uint newHeatDistance = current.HeatDistance + Map[newrow, _col].HeatLossValue;
-                    if (Map[newrow, _col].Visited) {
-                        if (newHeatDistance <= Map[newrow, _col].HeatDistance) {
-                            Map[newrow, _col].HeatDistance = newHeatDistance;
-                            if (TurnTaken) {
-                                Map[newrow, _col].StraightCount = 1;
-                            } else {
-                                Map[newrow, _col].StraightCount = current.StraightCount + 1;
-                            }
-                            ProcessNeighbours(newrow, _col, Direction.Up);
-                        }
-
-                    } else {
-                        Map[newrow, _col].Visited = true;
-                        Map[newrow, _col].HeatDistance = newHeatDistance;
-                        //recurse
-                        if (TurnTaken) {
-                            Map[newrow, _col].StraightCount = 1;
-                        } else {
-                            Map[newrow, _col].StraightCount = current.StraightCount + 1;
-                        }
-                        ProcessNeighbours(newrow, _col, Direction.Up);
-                    }
-
-                }
-            } while (false);
-
-            //if (_row != 0 && _lastDirection != Direction.Down) { // edge check
-            //    int newrow = _row - 1;
-            //    if (Map[newrow, _col].Height <= (current.Height + 1)) {
-            //        //accessible
-            //        int newDist = current.Distance + 1;
-            //        if (Map[newrow, _col].Visited) {
-            //            if (newDist < Map[newrow, _col].Distance) {
-            //                Map[newrow, _col].Distance = newDist;
-            //                ProcessNeighbours(newrow, _col);
-            //            }
-
-            //        } else {
-            //            Map[newrow, _col].Visited = true;
-            //            Map[newrow, _col].Distance = newDist;
-            //            //recurse
-            //            ProcessNeighbours(newrow, _col);
-            //        }
-
-            //    }
-            //}
-            //down
-            do {
-                if (_row != (MatrixSize - 1) && _lastDirection != Direction.Up) {
-                    int newrow = _row + 1;
-                    bool TurnTaken = false;
-                    if (_lastDirection == Direction.Down) {
-                        if (current.StraightCount > 2) {
-                            //cant go more 
-                            break;
-                        } else {
-                            TurnTaken = false;
-                            //Map[newrow, _col].StraightCount = current.StraightCount + 1;
-                        }
-                    } else {
-                        //turn taken
-                        TurnTaken = true;
-                        //Map[newrow, _col].StraightCount = 1;
-                    }
-
-                    //accessible
-                    uint newHeatDistance = current.HeatDistance + Map[newrow, _col].HeatLossValue;
-                    if (Map[newrow, _col].Visited) {
-                        if (newHeatDistance <= Map[newrow, _col].HeatDistance) {
-                            Map[newrow, _col].HeatDistance = newHeatDistance;
-                            if (TurnTaken) {
-                                Map[newrow, _col].StraightCount = 1;
-                            } else {
-                                Map[newrow, _col].StraightCount = current.StraightCount + 1;
-                            }
-                            ProcessNeighbours(newrow, _col, Direction.Down);
-                        }
-
-                    } else {
-                        Map[newrow, _col].Visited = true;
-                        Map[newrow, _col].HeatDistance = newHeatDistance;
-                        //recurse
-                        if (TurnTaken) {
-                            Map[newrow, _col].StraightCount = 1;
-                        } else {
-                            Map[newrow, _col].StraightCount = current.StraightCount + 1;
-                        }
-                        ProcessNeighbours(newrow, _col, Direction.Down);
-                    }
 
 
-                }
-            } while (false);
-            //if (_row != (MatrixSize - 1) && _lastDirection != Direction.Up) {
-            //    int newrow = _row + 1;
-            //    if (Map[newrow, _col].Height <= (current.Height + 1)) {
-            //        //accessible
-            //        int newDist = current.Distance + 1;
-            //        if (Map[newrow, _col].Visited) {
-            //            if (newDist < Map[newrow, _col].Distance) {
-            //                Map[newrow, _col].Distance = newDist;
-            //                ProcessNeighbours(newrow, _col);
-            //            }
-
-            //        } else {
-            //            Map[newrow, _col].Visited = true;
-            //            Map[newrow, _col].Distance = newDist;
-            //            //recurse
-            //            ProcessNeighbours(newrow, _col);
-            //        }
-
-            //    }
-            //}
-            //left
-            do {
-                if (_col != 0 && _lastDirection != Direction.Right) {
-                    int newcol = _col - 1;
-                    bool TurnTaken = false;
-                    if (_lastDirection == Direction.Left) {
-                        if (current.StraightCount > 2) {
-                            //cant go more 
-                            break;
-                        } else {
-                            TurnTaken = false;
-                            //Map[_row, newcol].StraightCount = current.StraightCount + 1;
-                        }
-                    } else {
-                        //turn taken
-                        TurnTaken = true;
-                        //Map[_row, newcol].StraightCount = 1;
-                    }
-
-                    //accessible
-                    uint newHeatDistance = current.HeatDistance + Map[_row, newcol].HeatLossValue;
-                    if (Map[_row, newcol].Visited) {
-                        if (newHeatDistance <= Map[_row, newcol].HeatDistance) {
-                            Map[_row, newcol].HeatDistance = newHeatDistance;
-                            if (TurnTaken) {
-                                Map[_row, newcol].StraightCount = 1;
-                            } else {
-                                Map[_row, newcol].StraightCount = current.StraightCount + 1;
-                            }
-                            ProcessNeighbours(_row, newcol, Direction.Left);
-                        }
-
-                    } else {
-                        Map[_row, newcol].Visited = true;
-                        Map[_row, newcol].HeatDistance = newHeatDistance;
-                        //recurse
-                        if (TurnTaken) {
-                            Map[_row, newcol].StraightCount = 1;
-                        } else {
-                            Map[_row, newcol].StraightCount = current.StraightCount + 1;
-                        }
-                        ProcessNeighbours(_row, newcol, Direction.Left);
-                    }
-
-
-                }
-            } while (false);
-            //if (_col != 0 && _lastDirection != Direction.Right) {
-            //    int newcol = _col - 1;
-            //    if (Map[_row, newcol].Height <= (current.Height + 1)) {
-            //        //accessible
-            //        int newDist = current.Distance + 1;
-            //        if (Map[_row, newcol].Visited) {
-            //            if (newDist < Map[_row, newcol].Distance) {
-            //                Map[_row, newcol].Distance = newDist;
-            //                ProcessNeighbours(_row, newcol);
-            //            }
-
-            //        } else {
-            //            Map[_row, newcol].Visited = true;
-            //            Map[_row, newcol].Distance = newDist;
-            //            //recurse
-            //            ProcessNeighbours(_row, newcol);
-            //        }
-
-            //    }
-            //}
             //right
             do {
                 if (_col != (MatrixSize - 1) && _lastDirection != Direction.Left) {
@@ -318,7 +131,27 @@ namespace _2023_day_17 {
                             } else {
                                 Map[_row, newcol].StraightCount = current.StraightCount + 1;
                             }
-                            ProcessNeighbours(_row, newcol, Direction.Right);
+                            bool NextStep = false;
+                            if (Map[MatrixSize - 1, MatrixSize - 1].Visited) {
+                                if (Map[_row, newcol].HeatDistance < Map[MatrixSize - 1, MatrixSize - 1].HeatDistance) {
+                                    if (_row < MatrixSize - 1 || newcol < MatrixSize - 1) {
+                                        NextStep = true;
+                                    }
+                                }
+                            } else {
+                                NextStep = true;
+                            }
+
+                            if (NextStep) {
+                                ProcessNeighbours(_row, newcol, Direction.Right);
+                            }
+
+                            if (_row == MatrixSize - 1 && newcol == MatrixSize - 1) {
+                                DrawHeatDistanceMap();
+                            }
+                            //if (_row < MatrixSize - 1 || newcol < MatrixSize - 1) {
+                            //    ProcessNeighbours(_row, newcol, Direction.Right);
+                            //}
                         }
 
                     } else {
@@ -330,13 +163,281 @@ namespace _2023_day_17 {
                         } else {
                             Map[_row, newcol].StraightCount = current.StraightCount + 1;
                         }
-                        ProcessNeighbours(_row, newcol, Direction.Right);
+
+                        bool NextStep = false;
+                        if (Map[MatrixSize - 1, MatrixSize - 1].Visited) {
+                            if (Map[_row, newcol].HeatDistance < Map[MatrixSize - 1, MatrixSize - 1].HeatDistance) {
+                                if (_row < MatrixSize - 1 || newcol < MatrixSize - 1) {
+                                    NextStep = true;
+                                }
+                            }
+                        } else {
+                            NextStep = true;
+                        }
+
+                        if (NextStep) {
+                            ProcessNeighbours(_row, newcol, Direction.Right);
+                        }
+                        if (_row == MatrixSize - 1 && newcol == MatrixSize - 1) {
+                            DrawHeatDistanceMap();
+                        }
+                        //if (_row < MatrixSize - 1 || newcol < MatrixSize - 1) {
+                        //    ProcessNeighbours(_row, newcol, Direction.Right);
+                        //}
                     }
 
 
                 }
             } while (false);
+            //down
+            do {
+                if (_row != (MatrixSize - 1) && _lastDirection != Direction.Up) {
+                    int newrow = _row + 1;
+                    bool TurnTaken = false;
+                    if (_lastDirection == Direction.Down) {
+                        if (current.StraightCount > 2) {
+                            //cant go more 
+                            break;
+                        } else {
+                            TurnTaken = false;
+                            //Map[newrow, _col].StraightCount = current.StraightCount + 1;
+                        }
+                    } else {
+                        //turn taken
+                        TurnTaken = true;
+                        //Map[newrow, _col].StraightCount = 1;
+                    }
 
+                    //accessible
+                    uint newHeatDistance = current.HeatDistance + Map[newrow, _col].HeatLossValue;
+                    if (Map[newrow, _col].Visited) {
+                        if (newHeatDistance <= Map[newrow, _col].HeatDistance) {
+                            Map[newrow, _col].HeatDistance = newHeatDistance;
+                            if (TurnTaken) {
+                                Map[newrow, _col].StraightCount = 1;
+                            } else {
+                                Map[newrow, _col].StraightCount = current.StraightCount + 1;
+                            }
+                            bool NextStep = false;
+                            if (Map[MatrixSize - 1, MatrixSize - 1].Visited) {
+                                if (Map[newrow, _col].HeatDistance < Map[MatrixSize - 1, MatrixSize - 1].HeatDistance) {
+                                    if (newrow < MatrixSize - 1 || _col < MatrixSize - 1) {
+                                        NextStep = true;
+                                    }
+                                }
+                            } else {
+                                NextStep = true;
+                            }
+
+                            if (NextStep) {
+                                ProcessNeighbours(newrow, _col, Direction.Down);
+                            }
+                            if (newrow == MatrixSize - 1 && _col == MatrixSize - 1) {
+                                DrawHeatDistanceMap();
+                            }
+                            //if (newrow < MatrixSize - 1 || _col < MatrixSize - 1) {
+                            //    ProcessNeighbours(newrow, _col, Direction.Down);
+                            //}
+                        }
+
+                    } else {
+                        Map[newrow, _col].Visited = true;
+                        Map[newrow, _col].HeatDistance = newHeatDistance;
+                        //recurse
+                        if (TurnTaken) {
+                            Map[newrow, _col].StraightCount = 1;
+                        } else {
+                            Map[newrow, _col].StraightCount = current.StraightCount + 1;
+                        }
+                        bool NextStep = false;
+                        if (Map[MatrixSize - 1, MatrixSize - 1].Visited) {
+                            if (Map[newrow, _col].HeatDistance < Map[MatrixSize - 1, MatrixSize - 1].HeatDistance) {
+                                if (newrow < MatrixSize - 1 || _col < MatrixSize - 1) {
+                                    NextStep = true;
+                                }
+                            }
+                        } else {
+                            NextStep = true;
+                        }
+
+                        if (NextStep) {
+                            ProcessNeighbours(newrow, _col, Direction.Down);
+                        }
+                        if (newrow == MatrixSize - 1 && _col == MatrixSize - 1) {
+                            DrawHeatDistanceMap();
+                        }
+                        //if (newrow < MatrixSize - 1 || _col < MatrixSize - 1) {
+                        //    ProcessNeighbours(newrow, _col, Direction.Down);
+                        //}
+                    }
+
+
+                }
+            } while (false);
+            //top neighbour
+            do {
+                if (_row != 0 && _lastDirection != Direction.Down) {
+                    int newrow = _row - 1;
+                    bool TurnTaken = false;
+                    if (_lastDirection == Direction.Up) {
+                        if (current.StraightCount > 2) {
+                            //cant go more 
+                            break;
+                        } else {
+                            TurnTaken = false;
+                            //Map[newrow, _col].StraightCount = current.StraightCount + 1;
+                        }
+                    } else {
+                        //turn taken
+                        TurnTaken = true;
+                        //Map[newrow, _col].StraightCount = 1;
+                    }
+
+                    //accessible
+                    uint newHeatDistance = current.HeatDistance + Map[newrow, _col].HeatLossValue;
+                    if (Map[newrow, _col].Visited) {
+                        if (newHeatDistance <= Map[newrow, _col].HeatDistance) {
+                            Map[newrow, _col].HeatDistance = newHeatDistance;
+                            if (TurnTaken) {
+                                Map[newrow, _col].StraightCount = 1;
+                            } else {
+                                Map[newrow, _col].StraightCount = current.StraightCount + 1;
+                            }
+
+                            bool NextStep = false;
+                            if (Map[MatrixSize - 1, MatrixSize - 1].Visited) {
+                                if (Map[newrow, _col].HeatDistance < Map[MatrixSize - 1, MatrixSize - 1].HeatDistance) {
+                                    if (newrow < MatrixSize - 1 || _col < MatrixSize - 1) {
+                                        NextStep = true;
+                                    }
+                                }
+                            } else {
+                                NextStep = true;
+                            }
+
+                            if (NextStep) {
+                                ProcessNeighbours(newrow, _col, Direction.Up);
+
+                            }
+                            //if (newrow < MatrixSize-1 || _col < MatrixSize - 1) {
+                            //    ProcessNeighbours(newrow, _col, Direction.Up);
+                            //}
+                        }
+
+                    } else {
+                        Map[newrow, _col].Visited = true;
+                        Map[newrow, _col].HeatDistance = newHeatDistance;
+                        //recurse
+                        if (TurnTaken) {
+                            Map[newrow, _col].StraightCount = 1;
+                        } else {
+                            Map[newrow, _col].StraightCount = current.StraightCount + 1;
+                        }
+                        bool NextStep = false;
+                        if (Map[MatrixSize - 1, MatrixSize - 1].Visited) {
+                            if (Map[newrow, _col].HeatDistance < Map[MatrixSize - 1, MatrixSize - 1].HeatDistance) {
+                                if (newrow < MatrixSize - 1 || _col < MatrixSize - 1) {
+                                    NextStep = true;
+                                }
+                            }
+                        } else {
+                            NextStep = true;
+                        }
+
+                        if (NextStep) {
+                            ProcessNeighbours(newrow, _col, Direction.Up);
+                        }
+                        //if (newrow < MatrixSize - 1 || _col < MatrixSize - 1) {
+                        //    ProcessNeighbours(newrow, _col, Direction.Up);
+                        //}
+                    }
+
+                }
+            } while (false);
+
+            //left
+            do {
+                if (_col != 0 && _lastDirection != Direction.Right) {
+                    int newcol = _col - 1;
+                    bool TurnTaken = false;
+                    if (_lastDirection == Direction.Left) {
+                        if (current.StraightCount > 2) {
+                            //cant go more 
+                            break;
+                        } else {
+                            TurnTaken = false;
+                            //Map[_row, newcol].StraightCount = current.StraightCount + 1;
+                        }
+                    } else {
+                        //turn taken
+                        TurnTaken = true;
+                        //Map[_row, newcol].StraightCount = 1;
+                    }
+
+                    //accessible
+                    uint newHeatDistance = current.HeatDistance + Map[_row, newcol].HeatLossValue;
+                    if (Map[_row, newcol].Visited) {
+                        if (newHeatDistance <= Map[_row, newcol].HeatDistance) {
+                            Map[_row, newcol].HeatDistance = newHeatDistance;
+                            if (TurnTaken) {
+                                Map[_row, newcol].StraightCount = 1;
+                            } else {
+                                Map[_row, newcol].StraightCount = current.StraightCount + 1;
+                            }
+
+                            bool NextStep = false;
+                            if (Map[MatrixSize - 1, MatrixSize - 1].Visited) {
+                                if (Map[_row, newcol].HeatDistance < Map[MatrixSize - 1, MatrixSize - 1].HeatDistance) {
+                                    if (_row < MatrixSize - 1 || newcol < MatrixSize - 1) {
+                                        NextStep = true;
+                                    }
+                                }
+                            } else {
+                                NextStep = true;
+                            }
+
+                            if (NextStep) {
+                                ProcessNeighbours(_row, newcol, Direction.Left);
+                            }
+                            //if (_row < MatrixSize - 1 || newcol < MatrixSize - 1) {
+                            //    ProcessNeighbours(_row, newcol, Direction.Left);
+                            //}
+                        }
+
+                    } else {
+                        Map[_row, newcol].Visited = true;
+                        Map[_row, newcol].HeatDistance = newHeatDistance;
+                        //recurse
+                        if (TurnTaken) {
+                            Map[_row, newcol].StraightCount = 1;
+                        } else {
+                            Map[_row, newcol].StraightCount = current.StraightCount + 1;
+                        }
+
+                        bool NextStep = false;
+                        if (Map[MatrixSize - 1, MatrixSize - 1].Visited) {
+                            if (Map[_row, newcol].HeatDistance < Map[MatrixSize - 1, MatrixSize - 1].HeatDistance) {
+                                if (_row < MatrixSize - 1 || newcol < MatrixSize - 1) {
+                                    NextStep = true;
+                                }
+                            }
+                        } else {
+                            NextStep = true;
+                        }
+
+                        if (NextStep) {
+                            ProcessNeighbours(_row, newcol, Direction.Left);
+                        }
+
+                        //if (_row < MatrixSize - 1 || newcol < MatrixSize - 1) {
+                        //    ProcessNeighbours(_row, newcol, Direction.Left);
+                        //}
+                    }
+
+
+                }
+            } while (false);
+            Stack.RemoveAt(Stack.Count - 1);    
         }
         private void CopyDistMap() {
             //for (int Row = 0; Row < MatrixSize; Row++) {
@@ -349,13 +450,13 @@ namespace _2023_day_17 {
             //}
         }
         private void DrawHeatDistanceMap() {
-            for (int Row = 0; Row < MatrixSize; Row++) {
-                string line = "";
-                for (int Col = 0; Col < MatrixSize; Col++) {
-                    line += Map[Row, Col].HeatLossValue.ToString() + " ";
-                }
-                Console.WriteLine(line);
-            }
+            //for (int Row = 0; Row < MatrixSize; Row++) {
+            //    string line = "";
+            //    for (int Col = 0; Col < MatrixSize; Col++) {
+            //        line += " " + Map[Row, Col].HeatLossValue.ToString() + " ";
+            //    }
+            //    Console.WriteLine(line);
+            //}
             Console.WriteLine("");
             Console.WriteLine("");
 
@@ -363,13 +464,21 @@ namespace _2023_day_17 {
             for (int Row = 0; Row < MatrixSize; Row++) {
                 string line = "";
                 for (int Col = 0; Col < MatrixSize; Col++) {
-                    if (Map[Row, Col].HeatDistance == PrevMap[Row, Col].HeatDistance) {
-                        Console.Write(Map[Row, Col].HeatDistance.ToString() + " ");
-                    } else {
+
+                    if (Stack.Any(x => x.row == Row && x.col == Col)) {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(Map[Row, Col].HeatDistance.ToString() + " ");
+                        Console.Write(" " + Map[Row, Col].HeatDistance.ToString().PadRight(4));
                         Console.ForegroundColor = originalColor;
+                    } else {
+                        Console.Write(" " + Map[Row, Col].HeatDistance.ToString().PadRight(4));
                     }
+                    //if (Map[Row, Col].HeatDistance == PrevMap[Row, Col].HeatDistance) {
+                    //    Console.Write(" " + Map[Row, Col].HeatDistance.ToString().PadRight(4));
+                    //} else {
+                    //    Console.ForegroundColor = ConsoleColor.Red;
+                    //    Console.Write(" " + Map[Row, Col].HeatDistance.ToString().PadRight(4));
+                    //    Console.ForegroundColor = originalColor;
+                    //}
                 }
                 Console.Write("\r\n");
                 //Console.WriteLine(line);
