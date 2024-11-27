@@ -12,7 +12,7 @@ namespace _2023_day_17 {
         Right = 3,
         Nodirection = 4,
     }
-    public class Tile {
+    public struct Tile {
         public uint HeatLossValue;
         public uint HeatDistance;
         public int StraightCount;
@@ -29,7 +29,7 @@ namespace _2023_day_17 {
         public uint CycleCnt = 0;
         public int MatrixSize;
         public Tile[,] Map;
-        public uint[,] HeatDistanceMap;
+        public Tile[,] PrevMap;
         string HeatDistMapString;
         public Solution() {
             string lineOfText;
@@ -49,7 +49,8 @@ namespace _2023_day_17 {
                     MatrixSize = lineOfText.Count();
                     //initialize input
                     Map = new Tile[MatrixSize, MatrixSize];
-                    HeatDistanceMap = new uint[MatrixSize, MatrixSize];
+                    PrevMap = new Tile[MatrixSize, MatrixSize];
+
                 }
                 int Col = 0;
                 foreach (char c in lineOfText) {
@@ -75,12 +76,14 @@ namespace _2023_day_17 {
         }
 
         private void ProcessNeighbours(int _row, int _col, Direction _lastDirection) {
+            Console.WriteLine("Row: " + _row.ToString() + " Col: " + _col.ToString());
             CycleCnt++;
             Tile current = Map[_row, _col];
             Map[_row, _col].LastDirection = _lastDirection;
+            DrawHeatDistanceMap();
+            Console.Clear();
             if (current.HeatDistance == 76 && _row == 9 && _col == 12) {
                 CopyDistMap();
-                ;
             }
             //top neighbour
             do {
@@ -336,14 +339,45 @@ namespace _2023_day_17 {
 
         }
         private void CopyDistMap() {
+            //for (int Row = 0; Row < MatrixSize; Row++) {
+            //    string line = "";
+            //    for (int Col = 0; Col < MatrixSize; Col++) {
+            //        line += Map[Row, Col].HeatDistance.ToString() + " ";
+            //        HeatDistanceMap[Row, Col] = Map[Row, Col].HeatDistance;
+            //    }
+            //    HeatDistMapString += (line + "\r\n");
+            //}
+        }
+        private void DrawHeatDistanceMap() {
             for (int Row = 0; Row < MatrixSize; Row++) {
                 string line = "";
                 for (int Col = 0; Col < MatrixSize; Col++) {
-                    line += Map[Row, Col].HeatDistance.ToString() + " ";
-                    HeatDistanceMap[Row, Col] = Map[Row, Col].HeatDistance;
+                    line += Map[Row, Col].HeatLossValue.ToString() + " ";
                 }
-                HeatDistMapString += (line + "\r\n");
+                Console.WriteLine(line);
             }
+            Console.WriteLine("");
+            Console.WriteLine("");
+
+            var originalColor = Console.ForegroundColor;
+            for (int Row = 0; Row < MatrixSize; Row++) {
+                string line = "";
+                for (int Col = 0; Col < MatrixSize; Col++) {
+                    if (Map[Row, Col].HeatDistance == PrevMap[Row, Col].HeatDistance) {
+                        Console.Write(Map[Row, Col].HeatDistance.ToString() + " ");
+                    } else {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(Map[Row, Col].HeatDistance.ToString() + " ");
+                        Console.ForegroundColor = originalColor;
+                    }
+                }
+                Console.Write("\r\n");
+                //Console.WriteLine(line);
+            }
+            ;
+            Array.Copy(Map, PrevMap, Map.Length);
+            //PrevMap = Map;
+            ;
         }
         private void DrawHeadDistance() {
             Console.WriteLine("");
